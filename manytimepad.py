@@ -1,6 +1,7 @@
 # David Horowitz 
 #Many time pad
 import string
+import hashlib
 c0 = '2d0a0612061b0944000d161f0c1746430c0f0952181b004c1311080b4e07494852'
 c1 = "200a054626550d051a48170e041d011a001b470204061309020005164e15484f44"
 c2 = "3818101500180b441b06004b11104c064f1e0616411d064c161b1b04071d460101"
@@ -57,3 +58,14 @@ key = "596f75666f756e647468656b657921636f6e67726174756c6174696f6e73212121" #xor 
 
 for ciphertext in ciphertexts: #xor each ciphertext with the final key
     print(str_xor(key, ciphertext))
+
+
+hex_dig = '596f75666f756e647468656b657921636f6e67726174756c6174696f6e73212121'
+for _ in range(14): #solves the problem of the key changing nightly for 2 weeks
+    hex_dig = bytes(hex_dig, encoding="ascii")
+    hash_object = hashlib.sha256(hex_dig)
+    hex_dig = hash_object.hexdigest()
+    hex_dig = str(hex_dig)
+    hex_dig = hex_dig + "00100001"
+
+print(hex_dig)

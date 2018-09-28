@@ -47,9 +47,9 @@ for ciphertext in ciphertexts: #for each ciphertext
         found_key[index] ='{:02X}'.format(ord(space_xor[index])) #convert xor back to hex
         known_key_indexes.append(index) #add the index to the known key indexes
 
-found_key_final = ''.join([val if val is not None else '00' for val in found_key]) #create the final key from the vals in found_key, if the val wasn't found put 00
+found_key_final = ''.join([x if x is not None else '00' for x in found_key]) #create the final key from the vals in found_key, if the val wasn't found put 00
 output = str_xor(found_key_final, c0) #xor the found key with the target ciphertext
-print(''.join([char if index in known_key_indexes else '#' for index, char in enumerate(output)])) #print out the xor result, if the char isn't known put a #
+print(''.join([x if index in known_key_indexes else '#' for index, x in enumerate(output)])) #print out the xor result, if the char isn't known put a #
 
 #manually observe key 
 #result was: #esting #est#ng can you read t#i>
